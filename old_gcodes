@@ -1,0 +1,52 @@
+start:
+; Ender 3 Custom Start G-code
+G92 E0 ; Reset Extruder
+M190 S{material_bed_temperature_layer_0} ; heat the bed, to what is set in Cura
+
+G28 ; Home all axes
+
+G29 P1  ; Run (5x5 in printer as of writing) mesh leveling on every print (UBL)
+; G29 P3  ; Interpolate extra points
+; G29 P3
+G29 S0  ; Save mesh into slot 1
+G29 F10 ; 10mm fade on levelling
+G29 A   ; Activate UBL
+G29 L0  ; Load slot 1
+;G29 J   ; Tilt mesh
+C108    ; MRiscoc Custom - close mesh viewer
+
+M593 F29.85 ; set shaper 
+
+M500    ; Save all settings
+
+; G29 A; Activate Auto bed-level (BL-Touch)
+; G29 L0; Load slot 0 mesh
+; G29 J; Tilt mesh after 3-point probe
+; G29 F10; 10mm fade on levelling
+
+M109 S{material_print_temperature} <feff>T0 ; heat hotend to what is set in Cura
+G92 E0 ; Reset Extruder
+G1 Z2.0 F3000 ; Move Z Axis up little to prevent scratching of Heat Bed
+G1 X0.1 Y20 Z0.3 F5000.0 ; Move to start position
+G1 X0.1 Y200.0 Z0.3 F1500.0 E15 ; Draw the first line
+G1 X0.4 Y200.0 Z0.3 F5000.0 ; Move to side a little
+G1 X0.4 Y20 Z0.3 F1500.0 E30 ; Draw the second line
+G92 E0 ; Reset Extruder
+G1 Z2.0 F3000 ; Move Z Axis up little to prevent scratching of Heat Bed
+G1 X5 Y20 Z0.3 F5000.0 ; Move over to prevent blob squish
+
+end:
+G91 ;Relative positioning
+G1 E-2 F2700 ;Retract a bit
+G1 E-2 Z0.2 F2400 ;Retract and raise Z
+G1 X5 Y5 F3000 ;Wipe out
+G1 Z10 ;Raise Z more
+G90 ;Absolute positioning
+
+G1 X0 Y{machine_depth} ;Present print
+M106 S0 ;Turn-off fan
+M104 S0 ;Turn-off hotend
+M140 S0 ;Turn-off bed
+
+M84 X Y E ;Disable all steppers but Z
+
