@@ -1,6 +1,6 @@
 # Klipper Configuration Files for a Modified Ender 3 V2 Printer
 
-Welcome to the repository that houses meticulously crafted configuration files for a modified Ender 3 V2 printer, complete with the Sprite Pro Extruder, CR Touch, and a 4.2.7 silent board. Due to popular demand I added a config file for a 4.2.2 board.  These configuration files are specifically designed to empower you with unrivaled control and precision. 
+Welcome to the repository that houses meticulously crafted and then not so maticulously modified configuration files for a slightly modified Ender 3 V2 printer, with the stock extruder (although has been converted to direct drive), CR Touch, and a 4.2.2 silent board.  
 
 ## Overview
 
